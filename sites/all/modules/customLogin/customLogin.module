@@ -40,9 +40,8 @@ function customLogin_form_alter(&$form, &$form_state, $form_id) {
       }
 }
 
-function customLogin_user_insert(&$edit, $account, $category){
-   print('hi');
-//    $edit=array();
-//    $edit['of_age'][LANGUAGE_NONE][0]['value'] = 'yes';
-//  user_save($account, $edit);
+function customLogin_user_presave(&$edit, $account, $category){// Saves of_age to user profile
+    $edit['of_age'] = 'yes';
+
+
 }
