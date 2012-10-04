@@ -11,12 +11,10 @@ function customLogin_form_alter(&$form, &$form_state, $form_id) {
               $minAge = strtotime(date("d")."-".date("m")."-".(date("Y")-18)); // Set min age to 18 years before todays date
               $userAge = strtotime($form_state['values']['customLogin_ask_age']['day'] . "-" .  //Get the users age based on form
                       $form_state['values']['customLogin_ask_age']['month'] . "-" . 
-                      $form_state['values']['customLogin_ask_age']['year']);
-              
+                      $form_state['values']['customLogin_ask_age']['year']);  
              if (!($userAge < $minAge)){//compare user age to min age
                 form_set_error('date', t('Must be over 18'));
-              }
-              
+              }  
           }
           $options = array( //set the options for the age radio buttons
             'male' => t('Male'),
@@ -39,9 +37,8 @@ function customLogin_form_alter(&$form, &$form_state, $form_id) {
           $form['#validate'][] = 'validation_function'; //Validate the form before submitting
       }
 }
-
 function customLogin_user_presave(&$edit, $account, $category){// Saves of_age to user profile
-    $edit['of_age'] = 'yes';
+    $edit['of_age'] = 'yes';//This adds the of_age variable to the users profile object
 
 
 }
