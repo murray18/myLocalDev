@@ -1,0 +1,48 @@
+<?php
+/**
+*  Implements hook_form_alter
+ */
+function customLogin_form_alter(&$form, &$form_state, $form_id) {
+      if($form_id != 'user_register_form'){ // not the create account form
+          return;
+      }
+      else{ // this is the create account form
+          function validation_function(&$form, $form_state){// validate is over 18
+              $minAge = strtotime(date("d")."-".date("m")."-".(date("Y")-18)); // Set min age to 18 years before todays date
+              $userAge = strtotime($form_state['values']['customLogin_ask_age']['day'] . "-" .  //Get the users age based on form
+                      $form_state['values']['customLogin_ask_age']['month'] . "-" . 
+                      $form_state['values']['customLogin_ask_age']['year']);
+              
+             if (!($userAge < $minAge)){//compare user age to min age
+                form_set_error('date', t('Must be over 18'));
+              }
+              
+          }
+          $options = array( //set the options for the age radio buttons
+            'male' => t('Male'),
+            'female' => t('Female'), 
+          );
+          $form['customLogin_ask_gender'] = array(
+              '#type' => 'radios',
+              '#title' => 'Gender',
+              '#options' => $options,
+            //  'required' => 'true',
+              
+          );
+          $form['customLogin_ask_age'] = array(
+              '#title' => 'What is your birthday?',
+              '#type' => 'date',
+              '#description' => 'Please enter your birthday.',
+             // 'required' => 'true',
+          );
+       //   debug($form, true);
+          $form['#validate'][] = 'validation_function'; //Validate the form before submitting
+      }
+}
+
+function customLogin_user_insert(&$edit, $account, $category){
+   print('hi');
+//    $edit=array();
+//    $edit['of_age'][LANGUAGE_NONE][0]['value'] = 'yes';
+//  user_save($account, $edit);
+}

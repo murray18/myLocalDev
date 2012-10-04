@@ -1,0 +1,5 @@
+<?php
+
+function test_amazons3_url_info($local_path, $info) {
+
+}

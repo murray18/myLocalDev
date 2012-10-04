@@ -1,0 +1,20 @@
+version: 0.9.6
+cmd: Command line code
+part: 1
+
+events: Time
+
+fl=php:internal
+fn=php::ini_get
+1 8
+
+fl=Command line code
+fn={main}
+
+summary: 355
+
+0 346
+cfn=php::ini_get
+calls=1 0 0
+1 8
+
